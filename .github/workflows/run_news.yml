@@ -1,0 +1,27 @@
+name: Daily News Push
+
+on:
+  schedule:
+    # 这里的 Cron 表达式是 UTC 时间，00:00 代表北京时间早上 8:00
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 允许手动点击运行，方便测试
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run script
+        env:
+          QMSG_KEY: ${{ secrets.QMSG_KEY }} # 读取 GitHub Secrets
+        run: python daily_news.py
