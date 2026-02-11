@@ -6,7 +6,7 @@ def sensitive_word_filter(text):
     """
     敏感词处理逻辑：将敏感词中间插入空格
     """
-    keywords = ["人民", "人民币", "伊朗", "公开信", "出台", "购房"]
+    keywords = ["人民", "人民币", "伊朗", "公开信", "出台", "购房", "威胁", "政府", "美甲"]
     
     filtered_text = text
     for word in keywords:
