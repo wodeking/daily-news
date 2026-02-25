@@ -2,12 +2,20 @@ import requests
 import json
 import os
 
+def open_txt(path):
+    with open(path) as f:
+        lines =  [i.strip() for i in f.readlines()]
+    return lines
+
+
 def sensitive_word_filter(text):
     """
     敏感词处理逻辑：将敏感词中间插入空格
     """
-    keywords = ["人民", "人民币", "伊朗", "公开信", "出台", "购房", "威胁", "政府", "美甲"]
+    keywords = ["人民", "人民币", "伊朗", "公开信", "出台", "购房", "威胁", "政府", "美甲","军事","商务部","国家安全","开门红","炸弹","炸弹袭击","自杀","贩毒","马强"]
     
+    keywords1 = open_txt("网易前端过滤敏感词库.txt") 
+    keywords += keywords1
     filtered_text = text
     for word in keywords:
         if word in filtered_text:
